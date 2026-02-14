@@ -20,7 +20,7 @@ function App() {
     };
 
     return (
-        <Router>
+        <Router basename='/crypto-toolkit'>
             <Navbar title="Crypto ToolKit" mode={mode} toggleMode={toggleMode} />
 
             <Routes>
