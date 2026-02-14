@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/crypto-toolkit/static/css/main.8d5f7389.css",
-    "main.js": "/crypto-toolkit/static/js/main.c8ee0b2f.js",
+    "main.js": "/crypto-toolkit/static/js/main.a7ecae38.js",
     "index.html": "/crypto-toolkit/index.html",
     "main.8d5f7389.css.map": "/crypto-toolkit/static/css/main.8d5f7389.css.map",
-    "main.c8ee0b2f.js.map": "/crypto-toolkit/static/js/main.c8ee0b2f.js.map"
+    "main.a7ecae38.js.map": "/crypto-toolkit/static/js/main.a7ecae38.js.map"
   },
   "entrypoints": [
     "static/css/main.8d5f7389.css",
-    "static/js/main.c8ee0b2f.js"
+    "static/js/main.a7ecae38.js"
   ]
 }
