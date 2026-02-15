@@ -20,9 +20,11 @@ This project is ideal for learning about cryptography, React hooks, and dynamic 
 
 ## Demo
 
+👉 [Live Demo](https://jenitlalshakya.github.io/crypto-toolkit/)
+
 **Default text and key:**
 
-- Input text: `The quick brown fox jumps over 13 lazy dogs.`  
+- Input text: `The quick brown fox jumps over the lazy dog.`  
 - Key: `cipher`  
 - Key mode: Repeat / AutoKey  
 
