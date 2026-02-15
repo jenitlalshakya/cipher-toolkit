@@ -1,75 +1,63 @@
-// Check if character is in the alphabet
-const isInAlphabet = (char, alphabet) => {
-    return alphabet.toUpperCase().includes(char.toUpperCase());
+// Helper: Check if character is in the alphabet
+const isInAlphabet = (char, alphabet) => alphabet.toUpperCase().includes(char.toUpperCase());
+
+// Helper: Shift a character by a given amount within the alphabet
+const shiftChar = (char, shift, alphabet, encode = true) => {
+    const upperAlphabet = alphabet.toUpperCase();
+    if (!isInAlphabet(char, alphabet)) return char;
+
+    const isUpper = char === char.toUpperCase();
+    const charIndex = upperAlphabet.indexOf(char.toUpperCase());
+    const newIndex = encode
+        ? (charIndex + shift) % upperAlphabet.length
+        : (charIndex - shift + upperAlphabet.length) % upperAlphabet.length;
+
+    const resultChar = upperAlphabet[newIndex];
+    return isUpper ? resultChar : resultChar.toLowerCase();
 };
 
-// Format the key based on mode: repeat or autoKey
-const formatKey = (text, key, keyMode = "repeat", alphabet = "abcdefghijklmnopqrstuvwxyz") => {
-    if (!key) return "";
+// Helper: Format the key for Repeat mode
+const formatRepeatKey = (text, key, alphabet) => {
     const upperAlphabet = alphabet.toUpperCase();
     key = key.toUpperCase().replace(new RegExp(`[^${upperAlphabet}]`, "g"), "");
-
     let formattedKey = "";
     let keyIndex = 0;
 
-    if (keyMode === "repeat") {
-        // Repeat mode: cycle through key letters for letters in text
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            if (isInAlphabet(char, alphabet)) {
-                formattedKey += key[keyIndex % key.length];
-                keyIndex++;
-            } else {
-                formattedKey += char; // keep punctuation/numbers
-            }
-        }
-    } else if (keyMode === "autoKey") {
-        // AutoKey mode
-        let autoKey = key;
-        let plainLetters = [];
-
-        // Collect plaintext letters in alphabet only
-        for (let i = 0; i < text.length; i++) {
-            if (isInAlphabet(text[i], alphabet)) plainLetters.push(text[i].toUpperCase());
-        }
-
-        let autoKeyIndex = 0;
-        let plainIndex = 0;
-
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            if (isInAlphabet(char, alphabet)) {
-                if (autoKeyIndex < autoKey.length) {
-                    formattedKey += autoKey[autoKeyIndex];
-                } else {
-                    formattedKey += plainLetters[plainIndex];
-                    plainIndex++;
-                }
-                autoKeyIndex++;
-            } else {
-                formattedKey += char; // keep numbers/punctuation
-            }
+    for (const char of text) {
+        if (isInAlphabet(char, alphabet)) {
+            formattedKey += key[keyIndex % key.length];
+            keyIndex++;
+        } else {
+            formattedKey += char; // keep punctuation/numbers
         }
     }
-
     return formattedKey;
 };
 
-// Encode function
+// Encode Vigenère cipher
 export const encodeVigenere = (text, key, keyMode = "repeat", alphabet = "abcdefghijklmnopqrstuvwxyz") => {
     if (!text || !key) return "";
-    const formattedKey = formatKey(text, key, keyMode, alphabet);
-    const upperAlphabet = alphabet.toUpperCase();
-    let result = "";
 
-    for (let i = 0; i < text.length; i++) {
-        const char = text[i];
+    if (keyMode === "repeat") {
+        const formattedKey = formatRepeatKey(text, key, alphabet);
+        return [...text].map((char, i) =>
+            shiftChar(char, alphabet.toUpperCase().indexOf(formattedKey[i].toUpperCase()), alphabet, true)
+        ).join("");
+    }
+
+    // AutoKey encode
+    const upperAlphabet = alphabet.toUpperCase();
+    key = key.toUpperCase().replace(new RegExp(`[^${upperAlphabet}]`, "g"), "");
+    let result = "";
+    let autoKey = key;
+
+    for (const char of text) {
         if (isInAlphabet(char, alphabet)) {
-            const isUpper = char === char.toUpperCase();
-            const charIndex = upperAlphabet.indexOf(char.toUpperCase());
-            const shift = upperAlphabet.indexOf(formattedKey[i].toUpperCase());
-            const encodedChar = upperAlphabet[(charIndex + shift) % upperAlphabet.length];
-            result += isUpper ? encodedChar : encodedChar.toLowerCase();
+            const shift = upperAlphabet.indexOf(autoKey[0]);
+            const encodedChar = shiftChar(char, shift, alphabet, true);
+            result += encodedChar;
+            autoKey += char.toUpperCase(); // append plaintext letter
+            autoKey = autoKey.slice(1); // slide key
         } else {
             result += char;
         }
@@ -77,21 +65,29 @@ export const encodeVigenere = (text, key, keyMode = "repeat", alphabet = "abcdef
     return result;
 };
 
-// Decode function
+// Decode Vigenère cipher
 export const decodeVigenere = (text, key, keyMode = "repeat", alphabet = "abcdefghijklmnopqrstuvwxyz") => {
     if (!text || !key) return "";
-    const formattedKey = formatKey(text, key, keyMode, alphabet);
-    const upperAlphabet = alphabet.toUpperCase();
-    let result = "";
 
-    for (let i = 0; i < text.length; i++) {
-        const char = text[i];
+    if (keyMode === "repeat") {
+        const formattedKey = formatRepeatKey(text, key, alphabet);
+        return [...text].map((char, i) =>
+            shiftChar(char, alphabet.toUpperCase().indexOf(formattedKey[i].toUpperCase()), alphabet, false)
+        ).join("");
+    }
+
+    // AutoKey decode
+    const upperAlphabet = alphabet.toUpperCase();
+    key = key.toUpperCase().replace(new RegExp(`[^${upperAlphabet}]`, "g"), "");
+    let result = "";
+    let currentKey = key;
+
+    for (const char of text) {
         if (isInAlphabet(char, alphabet)) {
-            const isUpper = char === char.toUpperCase();
-            const charIndex = upperAlphabet.indexOf(char.toUpperCase());
-            const shift = upperAlphabet.indexOf(formattedKey[i].toUpperCase());
-            const decodedChar = upperAlphabet[(charIndex - shift + upperAlphabet.length) % upperAlphabet.length];
-            result += isUpper ? decodedChar : decodedChar.toLowerCase();
+            const shift = upperAlphabet.indexOf(currentKey[0]);
+            const decodedChar = shiftChar(char, shift, alphabet, false);
+            result += decodedChar;
+            currentKey = currentKey.slice(1) + decodedChar.toUpperCase(); // slide key with decoded letter
         } else {
             result += char;
         }

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+.cipher-text {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.3rem !important;
+}
+
 .hover-blue-btn {
   background-color: #0d6efd !important;
   /* blue */

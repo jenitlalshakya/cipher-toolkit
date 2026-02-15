@@ -55,42 +55,42 @@ const CipherForm = (props) => {
 
     return (
         <div className="container my-4">
-            <h3 className="mb-4 text-center">{props.cipherName}</h3>
+            <h3 className="mb-4 text-center fw-bold">{props.cipherName}</h3>
             <div className="row">
                 {/* Input Section */}
                 <div className="col-md-4 mb-3">
-                    <label className="form-label fs-4">{mode === 'encode' ? 'Plain Text' : 'Cipher Text'}</label>
-                    <textarea className="form-control" rows="8" value={text} onChange={(e) => { setText(e.target.value); setIsEdited(true); }} onFocus={(e) => { if (!isEdited) e.target.select(); }} placeholder="Enter text here..."></textarea>
+                    <label className="form-label fs-4 fw-bold">{mode === 'encode' ? 'Plain Text' : 'Cipher Text'}</label>
+                    <textarea className="form-control cipher-text" rows="8" value={text} onChange={(e) => { setText(e.target.value); setIsEdited(true); }} onFocus={(e) => { if (!isEdited) e.target.select(); }} placeholder="Enter text here..."></textarea>
                 </div>
 
                 {/* Key / Mode / Alphabet Section */}
                 <div className="col-md-4 mb-3 d-flex flex-column justify-content-between">
                     <div>
-                        <label className="form-label fs-4">Key</label>
-                        <input type="text" className="form-control mb-3" value={key} onChange={(e) => { setKey(e.target.value); setIsEditedKey(true); }} onFocus={(e) => { if (!isEditedKey) e.target.select(); }} placeholder="Enter key..."></input>
+                        <label className="form-label fs-4 fw-bold">Key</label>
+                        <input type="text" className="form-control mb-3 cipher-text fw-bold" value={key} onChange={(e) => { setKey(e.target.value); setIsEditedKey(true); }} onFocus={(e) => { if (!isEditedKey) e.target.select(); }} placeholder="Enter key..."></input>
 
-                        <label className="form-label">Key Mode</label>
+                        <label className="form-label fw-bold">Key Mode</label>
                         <div className="d-flex mb-3">
-                            <button className={`btn me-2 rounded-pill ${keyMode === 'repeat' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setKeyMode('repeat')}>Repeat</button>
-                            <button className={`btn rounded-pill ${keyMode === 'autoKey' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setKeyMode('autoKey')}>AutoKey</button>
+                            <button className={`btn me-2 fw-bold rounded-pill ${keyMode === 'repeat' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setKeyMode('repeat')}>Repeat</button>
+                            <button className={`btn fw-bold rounded-pill ${keyMode === 'autoKey' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setKeyMode('autoKey')}>AutoKey</button>
                         </div>
 
-                        <label className="form-label">Alphabet</label>
-                        <input type="text" className="form-control" value={alphabet} onChange={e => setAlphabet(e.target.value)}></input>
+                        <label className="form-label fw-bold">Alphabet</label>
+                        <input type="text" className="form-control fw-bold cipher-text" value={alphabet} onChange={e => setAlphabet(e.target.value)}></input>
                         {hasDuplicates(alphabet) && <small className="text-danger">Alphabet contains duplicate letters. Fix to continue calculation.</small>}
                     </div>
 
                     <div className="d-flex mt-3">
-                        <button className={`btn me-2 rounded-pill ${mode === 'encode' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setMode('encode')}>Encode</button>
-                        <button className={`btn rounded-pill ${mode === 'decode' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setMode('decode')}>Decode</button>
+                        <button className={`btn fw-bold me-2 rounded-pill ${mode === 'encode' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setMode('encode')}>Encode</button>
+                        <button className={`btn fw-bold rounded-pill ${mode === 'decode' ? 'btn-primary' : 'btn-outline-primary'}`} onClick={() => setMode('decode')}>Decode</button>
                     </div>
                 </div>
 
                 {/* Output Section */}
                 <div className="col-md-4 mb-3">
-                    <label className="form-label fs-4">{mode === 'encode' ? 'Cipher Text' : 'Plain Text'}</label>
-                    <textarea className="form-control" rows="8" value={result} onFocus={(e) => e.target.select()} readOnly placeholder="Result will appear here..."></textarea>
-                    <div className="text-end mt-2"><button className="btn btn-primary" onClick={handleCopy}>Copy</button></div>
+                    <label className="form-label fs-4 fw-bold">{mode === 'encode' ? 'Cipher Text' : 'Plain Text'}</label>
+                    <textarea className="form-control cipher-text" rows="8" value={result} onFocus={(e) => e.target.select()} readOnly placeholder="Result will appear here..."></textarea>
+                    <div className="text-end mt-2"><button className="btn btn-primary fw-bold" onClick={handleCopy}>Copy</button></div>
                 </div>
 
                 {copyAlert && (
