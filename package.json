@@ -1,8 +1,8 @@
 {
-  "name": "crypto-toolkit",
+  "name": "cipher-toolkit",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jenitlalshakya.github.io/crypto-toolkit",
+  "homepage": "https://jenitlalshakya.github.io/cipher-toolkit",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",

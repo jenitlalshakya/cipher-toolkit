@@ -1,6 +1,6 @@
-# Crypto ToolKit
+# Cipher ToolKit
 
-**Crypto ToolKit** is a web-based tool built with **React** that allows you to encode and decode text using the **Vigenère cipher**. It also supports **live translation**, custom alphabets, and key modes like **Repeat** and **AutoKey**.  
+**Cipher ToolKit** is a web-based tool built with **React** that allows you to encode and decode text using the **Vigenère cipher**. It also supports **live translation**, custom alphabets, and key modes like **Repeat** and **AutoKey**.  
 
 This project is ideal for learning about cryptography, React hooks, and dynamic UI updates.
 
@@ -20,7 +20,7 @@ This project is ideal for learning about cryptography, React hooks, and dynamic 
 
 ## Demo
 
-👉 [Live Demo](https://jenitlalshakya.github.io/crypto-toolkit/)
+👉 [Live Demo](https://jenitlalshakya.github.io/cipher-toolkit/)
 
 **Default text and key:**
 
@@ -37,5 +37,5 @@ You can change the key, key mode, or alphabet to see different outputs.
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/jenitlalshakya/crypto-toolkit.git
-cd crypto-toolkit
+git clone https://github.com/jenitlalshakya/cipher-toolkit.git
+cd cipher-toolkit

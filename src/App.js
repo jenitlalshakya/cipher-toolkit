@@ -20,8 +20,8 @@ function App() {
     };
 
     return (
-        <Router basename='/crypto-toolkit'>
-            <Navbar title="Crypto ToolKit" mode={mode} toggleMode={toggleMode} />
+        <Router basename='/cipher-toolkit'>
+            <Navbar title="Cipher ToolKit" mode={mode} toggleMode={toggleMode} />
 
             <Routes>
                 <Route path="/" element={<VigenerePage />} />
