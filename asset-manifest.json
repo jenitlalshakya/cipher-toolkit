@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/cipher-toolkit/static/css/main.35213efd.css",
-    "main.js": "/cipher-toolkit/static/js/main.73480a7c.js",
+    "main.css": "/cipher-toolkit/static/css/main.ce80042e.css",
+    "main.js": "/cipher-toolkit/static/js/main.9cde2ea6.js",
     "index.html": "/cipher-toolkit/index.html",
-    "main.35213efd.css.map": "/cipher-toolkit/static/css/main.35213efd.css.map",
-    "main.73480a7c.js.map": "/cipher-toolkit/static/js/main.73480a7c.js.map"
+    "main.ce80042e.css.map": "/cipher-toolkit/static/css/main.ce80042e.css.map",
+    "main.9cde2ea6.js.map": "/cipher-toolkit/static/js/main.9cde2ea6.js.map"
   },
   "entrypoints": [
-    "static/css/main.35213efd.css",
-    "static/js/main.73480a7c.js"
+    "static/css/main.ce80042e.css",
+    "static/js/main.9cde2ea6.js"
   ]
 }
